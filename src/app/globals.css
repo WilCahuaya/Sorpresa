@@ -1,25 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fffbfb;
-  --foreground: #4a2c2a;
-  --font-sans: var(--font-quicksand), system-ui, sans-serif;
-  --font-serif: var(--font-cormorant), Georgia, serif;
+  --pearl: #f8f6f0;
+  --pearl-soft: #faf8f5;
+  --pearl-warm: #f5f3ed;
+  --pearl-muted: #ebe8e0;
+  --pearl-shadow: #e0ddd4;
+  --olive: #6b8e23;
+  --olive-light: #8b9a6b;
+  --olive-soft: #9caa7c;
+  --olive-dark: #556b2f;
+  --text-dark: #3d4a2d;
+  --text-muted: #5c6b4a;
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-body: var(--font-libre), Georgia, serif;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-quicksand);
+  --color-background: var(--pearl);
+  --color-foreground: var(--text-dark);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  background: var(--pearl);
+  color: var(--text-dark);
+  font-family: var(--font-body);
 }
 
-/* Fuente elegante para títulos y citas */
-.font-elegant {
-  font-family: var(--font-cormorant), Georgia, serif;
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Patrón sutil - perla con toques aceituna */
+.paper-texture {
+  background-image: 
+    radial-gradient(ellipse 100% 80% at 50% 0%, rgba(248, 246, 240, 0.9) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(139, 154, 107, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(107, 142, 35, 0.04) 0%, transparent 50%);
+}
+
+/* Línea decorativa - perla y aceituna */
+.ornament-line {
+  background: linear-gradient(90deg, transparent, var(--pearl-muted), var(--olive-light), var(--pearl-muted), transparent);
+  height: 1px;
+  opacity: 0.6;
+}
+
+/* Sombra suave estilo señorita */
+.shadow-pearl {
+  box-shadow: 0 4px 24px rgba(61, 74, 45, 0.06), 0 2px 8px rgba(139, 154, 107, 0.04);
 }

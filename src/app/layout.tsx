@@ -1,17 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Quicksand } from "next/font/google";
+import { Cormorant_Garamond, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+  variable: "--font-playfair",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
 });
 
-const quicksand = Quicksand({
-  variable: "--font-quicksand",
+const libreBaskerville = Libre_Baskerville({
+  variable: "--font-libre",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${cormorant.variable} ${quicksand.variable} font-sans antialiased`}
+        className={`${cormorant.variable} ${libreBaskerville.variable} font-sans antialiased`}
       >
         {children}
       </body>

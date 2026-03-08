@@ -6,7 +6,7 @@ import { config } from "@/config";
 import FloatingHearts from "./FloatingHearts";
 import TypewriterText from "./TypewriterText";
 
-type Screen = "initial" | "transition" | "main" | "surprise";
+type Screen = "initial" | "transition" | "main";
 
 export default function RomanticExperience() {
   const [screen, setScreen] = useState<Screen>("initial");
@@ -14,6 +14,7 @@ export default function RomanticExperience() {
   const [error, setError] = useState(false);
   const [showSurprise, setShowSurprise] = useState(false);
   const [showSecondVerse, setShowSecondVerse] = useState(false);
+  const [photoSrc, setPhotoSrc] = useState(config.photoUrl);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +27,10 @@ export default function RomanticExperience() {
     }
   };
 
+  const handlePhotoError = () => {
+    setPhotoSrc(config.defaultPhotoUrl ?? "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80");
+  };
+
   const handleSurpriseClick = () => {
     setShowSurprise(true);
   };
@@ -33,26 +38,29 @@ export default function RomanticExperience() {
   return (
     <div className="min-h-screen w-full overflow-x-hidden">
       <AnimatePresence mode="wait">
-        {/* Pantalla inicial */}
+        {/* Pantalla inicial - Perla delicada */}
         {screen === "initial" && (
           <motion.div
             key="initial"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="min-h-screen flex flex-col items-center justify-center px-6 py-12 bg-gradient-to-br from-rose-50 via-white to-amber-50"
+            className="min-h-screen flex flex-col items-center justify-center px-6 py-12 paper-texture"
+            style={{ background: "linear-gradient(180deg, #faf8f5 0%, #f8f6f0 50%, #f5f3ed 100%)" }}
           >
+            <span className="text-2xl mb-6 opacity-60">💕</span>
+            <div className="ornament-line w-24 mb-6" />
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-center max-w-md"
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="text-center max-w-sm"
             >
-              <p className="text-xl md:text-2xl text-rose-800/90 font-light mb-8 leading-relaxed">
+              <p className="text-xl md:text-2xl font-display text-[#3d4a2d] font-light mb-10 leading-[1.7] tracking-wide">
                 {config.messages.welcome}
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <motion.input
                   type="text"
                   value={password}
@@ -61,7 +69,8 @@ export default function RomanticExperience() {
                     setError(false);
                   }}
                   placeholder="Ingresa la clave ✨"
-                  className="w-full px-5 py-4 rounded-2xl border-2 border-rose-200/80 bg-white/80 backdrop-blur-sm text-rose-900 placeholder-rose-300 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-transparent shadow-sm transition-all"
+                  className="w-full px-5 py-4 rounded-2xl bg-white/80 border border-[#e0ddd4] text-[#3d4a2d] placeholder-[#8b9a6b]/70 focus:outline-none focus:ring-2 focus:ring-[#8b9a6b]/30 focus:border-[#8b9a6b]/50 transition-all duration-300 text-center tracking-wider shadow-pearl"
+                  style={{ fontFamily: "var(--font-libre)" }}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
@@ -70,10 +79,10 @@ export default function RomanticExperience() {
                 <AnimatePresence>
                   {error && (
                     <motion.p
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="text-rose-500 text-sm"
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="text-[#6b8e23] text-sm italic"
                     >
                       {config.messages.wrongPassword}
                     </motion.p>
@@ -82,140 +91,146 @@ export default function RomanticExperience() {
 
                 <motion.button
                   type="submit"
-                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-rose-400 to-amber-300 text-white font-medium shadow-lg shadow-rose-200/50 hover:shadow-xl hover:shadow-rose-300/50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  className="w-full py-4 rounded-2xl bg-[#8b9a6b]/90 text-white font-display tracking-[0.15em] uppercase text-sm hover:bg-[#7a8c5a] transition-all duration-300 shadow-pearl"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
                 >
                   Entrar
                 </motion.button>
               </form>
             </motion.div>
+            <div className="ornament-line w-24 mt-8" />
+            <span className="text-2xl mt-6 opacity-60">💕</span>
           </motion.div>
         )}
 
-        {/* Transición sorpresa */}
+        {/* Transición - Perla suave */}
         {screen === "transition" && (
           <motion.div
             key="transition"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="min-h-screen flex flex-col items-center justify-center px-6 bg-gradient-to-b from-rose-950/95 to-rose-900/98"
+            className="min-h-screen flex flex-col items-center justify-center px-6"
+            style={{ background: "linear-gradient(180deg, #f8f6f0 0%, #f5f3ed 100%)" }}
           >
             <FloatingHearts />
             <motion.p
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-rose-100 text-lg md:text-xl font-light text-center z-10"
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="text-[#5c6b4a] text-base md:text-lg font-display italic text-center z-10 tracking-wide"
             >
               {config.messages.loading}
             </motion.p>
-            <motion.div
-              className="mt-6 flex gap-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
+            <motion.div className="mt-8 flex gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
               {[0, 1, 2].map((i) => (
                 <motion.span
                   key={i}
-                  className="w-2 h-2 rounded-full bg-rose-300"
+                  className="w-2 h-2 rounded-full bg-[#8b9a6b]/60"
                   animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    delay: i * 0.2,
-                  }}
+                  transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.25 }}
                 />
               ))}
             </motion.div>
           </motion.div>
         )}
 
-        {/* Pantalla principal */}
+        {/* Pantalla principal - Tarjeta señorita */}
         {screen === "main" && (
           <motion.div
             key="main"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="min-h-screen flex flex-col items-center px-4 py-8 pb-16 bg-gradient-to-br from-rose-50 via-white to-amber-50"
+            className="min-h-screen pb-20"
+            style={{ background: "linear-gradient(180deg, #faf8f5 0%, #f8f6f0 100%)" }}
           >
+            {/* Foto con marco perla */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="w-full max-w-md"
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="relative w-full max-w-2xl mx-auto px-4 pt-6"
             >
-              {/* Tarjeta principal */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="bg-white rounded-3xl shadow-xl shadow-rose-100/50 overflow-hidden border border-rose-100/50"
-              >
-                {/* Foto */}
-                <div className="relative aspect-[4/3] bg-gradient-to-br from-rose-100 to-amber-100 overflow-hidden">
+              <div className="rounded-3xl overflow-hidden shadow-pearl border border-[#e0ddd4]/60 relative">
+                <div className="relative aspect-[4/5] max-h-[55vh]">
                   <img
-                    src={config.photoUrl}
+                    src={photoSrc}
                     alt="Foto especial"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = "none";
-                      target.nextElementSibling?.classList.remove("hidden");
-                    }}
+                    className="w-full h-full object-cover object-top"
+                    onError={handlePhotoError}
                   />
-                  <div className="hidden absolute inset-0 flex items-center justify-center">
-                    <span className="text-6xl">💐</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#f8f6f0]/40 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-0 right-0 flex justify-center">
+                    <span className="px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm text-white text-sm font-display tracking-widest">
+                      Te amo ❤️
+                    </span>
                   </div>
                 </div>
+              </div>
+            </motion.div>
 
-                <div className="p-6 md:p-8 space-y-5">
-                  <h1 className="text-2xl md:text-3xl font-semibold text-rose-800 text-center font-elegant">
-                    {config.messages.mainTitle}
-                  </h1>
-                  <p className="text-rose-700/90 text-center leading-relaxed">
-                    {config.messages.mainSubtitle}
-                  </p>
+            <div className="px-5 md:px-8 max-w-lg mx-auto mt-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35, duration: 0.5 }}
+                className="space-y-6"
+              >
+                {/* Tarjeta de contenido */}
+                <div className="bg-white/90 rounded-3xl p-6 md:p-8 shadow-pearl border border-[#e0ddd4]/50">
+                  <div className="text-center">
+                    <h1 className="font-display text-2xl md:text-3xl text-[#3d4a2d] font-medium tracking-tight">
+                      {config.messages.mainTitle}
+                    </h1>
+                    <div className="ornament-line w-12 mx-auto my-4" />
+                    <p className="text-[#5c6b4a]/95 text-sm md:text-base leading-relaxed">
+                      {config.messages.mainSubtitle}
+                    </p>
+                  </div>
 
-                  {/* Primer versículo */}
-                  <blockquote className="border-l-4 border-amber-300 pl-4 py-2 bg-amber-50/50 rounded-r-xl">
-                    <p className="text-rose-800/90 italic text-sm md:text-base font-elegant">
+                  <motion.blockquote
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.45 }}
+                    className="mt-6 pl-4 border-l-2 border-[#8b9a6b]/50 py-1 rounded-r-lg bg-[#f8f6f0]/50"
+                  >
+                    <p className="text-[#3d4a2d]/95 italic text-sm md:text-base font-display leading-relaxed">
                       &ldquo;{config.verses.first.text}&rdquo;
                     </p>
-                    <cite className="text-amber-700/80 text-xs mt-1 block">
+                    <cite className="text-[#6b8e23]/90 text-xs mt-2 block not-italic">
                       — {config.verses.first.reference}
                     </cite>
-                  </blockquote>
+                  </motion.blockquote>
 
-                  {/* Botón sorpresa */}
                   <motion.button
                     onClick={handleSurpriseClick}
-                    className="w-full py-4 rounded-2xl bg-gradient-to-r from-rose-400 to-amber-300 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    className="w-full mt-6 py-4 rounded-2xl border-2 border-[#8b9a6b] text-[#6b8e23] font-display text-sm tracking-[0.15em] uppercase hover:bg-[#8b9a6b]/10 transition-all duration-300"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
                   >
                     {config.messages.buttonLabel}
                   </motion.button>
 
-                  {/* Texto sorpresa (typewriter) */}
                   <AnimatePresence>
                     {showSurprise && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0 }}
-                        className="pt-4 border-t border-rose-100"
+                        className="mt-6 pt-6 border-t border-[#e0ddd4]"
                       >
                         <TypewriterText
                           text={config.messages.surpriseText}
                           onComplete={() => setShowSecondVerse(true)}
-                          className="text-rose-800 text-center font-medium"
+                          className="text-[#3d4a2d] text-center font-display text-base leading-relaxed"
                         />
                         <AnimatePresence>
                           {showSecondVerse && (
@@ -223,12 +238,12 @@ export default function RomanticExperience() {
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.5 }}
-                              className="mt-4 border-l-4 border-amber-300 pl-4 py-2 bg-amber-50/50 rounded-r-xl"
+                              className="mt-4 pl-4 border-l-2 border-[#8b9a6b]/50 py-1 rounded-r-lg bg-[#f8f6f0]/50"
                             >
-                              <p className="text-rose-800/90 italic text-sm font-elegant">
+                              <p className="text-[#3d4a2d]/95 italic text-sm font-display">
                                 &ldquo;{config.verses.second.text}&rdquo;
                               </p>
-                              <cite className="text-amber-700/80 text-xs mt-1 block">
+                              <cite className="text-[#6b8e23]/90 text-xs mt-2 block not-italic">
                                 — {config.verses.second.reference}
                               </cite>
                             </motion.blockquote>
@@ -237,23 +252,28 @@ export default function RomanticExperience() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-
-                  {/* Carta final */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6 }}
-                    className="pt-6"
-                  >
-                    <div className="bg-rose-50/80 rounded-2xl p-5 border border-rose-100/50">
-                      <p className="text-rose-800/90 text-sm md:text-base leading-relaxed whitespace-pre-line">
-                        {config.finalLetter}
-                      </p>
-                    </div>
-                  </motion.div>
                 </div>
+
+                {/* Carta final - estilo señorita */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="bg-white/80 rounded-3xl p-6 md:p-8 shadow-pearl border border-[#e0ddd4]/50"
+                >
+                  <div className="ornament-line w-full mb-5" />
+                  <p className="text-[#5c6b4a]/95 text-sm md:text-base leading-[1.9] whitespace-pre-line font-display">
+                    {config.finalLetter}
+                  </p>
+                  <div className="ornament-line w-full mt-5" />
+                  {config.messages.signature && (
+                    <p className="text-[#6b8e23] text-sm font-display italic text-right mt-4">
+                      {config.messages.signature}
+                    </p>
+                  )}
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
