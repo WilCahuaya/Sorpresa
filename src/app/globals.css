@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fffbfb;
+  --foreground: #4a2c2a;
+  --font-sans: var(--font-quicksand), system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-quicksand);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Fuente elegante para títulos y citas */
+.font-elegant {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
