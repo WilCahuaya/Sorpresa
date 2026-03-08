@@ -22,7 +22,7 @@ export default function TypewriterText({
       const timeout = setTimeout(() => {
         setDisplayedText((prev) => prev + text[currentIndex]);
         setCurrentIndex((prev) => prev + 1);
-      }, 50);
+      }, 25);
       return () => clearTimeout(timeout);
     } else {
       onComplete?.();

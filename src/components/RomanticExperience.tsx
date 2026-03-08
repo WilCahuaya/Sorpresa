@@ -167,7 +167,7 @@ export default function RomanticExperience() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#f8f6f0]/40 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-0 right-0 flex justify-center">
                     <span className="px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm text-white text-sm font-display tracking-widest">
-                      Te amo ❤️
+                      {config.photoOverlayText}
                     </span>
                   </div>
                 </div>
@@ -193,19 +193,29 @@ export default function RomanticExperience() {
                     </p>
                   </div>
 
-                  <motion.blockquote
+                  <motion.div
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.45 }}
-                    className="mt-6 pl-4 border-l-2 border-[#8b9a6b]/50 py-1 rounded-r-lg bg-[#f8f6f0]/50"
+                    className="mt-6 pl-4 border-l-2 border-[#8b9a6b]/50 py-2 rounded-r-lg bg-[#f8f6f0]/50 space-y-3"
                   >
+                    {config.verses.first.intro && (
+                      <p className="text-[#3d4a2d]/95 text-sm md:text-base font-display leading-relaxed">
+                        {config.verses.first.intro}
+                      </p>
+                    )}
                     <p className="text-[#3d4a2d]/95 italic text-sm md:text-base font-display leading-relaxed">
-                      &ldquo;{config.verses.first.text}&rdquo;
+                      &ldquo;{config.verses.first.verse}&rdquo;
                     </p>
-                    <cite className="text-[#6b8e23]/90 text-xs mt-2 block not-italic">
+                    {config.verses.first.closing && (
+                      <p className="text-[#3d4a2d]/95 text-sm md:text-base font-display leading-relaxed">
+                        {config.verses.first.closing}
+                      </p>
+                    )}
+                    <cite className="text-[#6b8e23]/90 text-xs block not-italic">
                       — {config.verses.first.reference}
                     </cite>
-                  </motion.blockquote>
+                  </motion.div>
 
                   <motion.button
                     onClick={handleSurpriseClick}
@@ -234,19 +244,24 @@ export default function RomanticExperience() {
                         />
                         <AnimatePresence>
                           {showSecondVerse && (
-                            <motion.blockquote
+                            <motion.div
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.5 }}
-                              className="mt-4 pl-4 border-l-2 border-[#8b9a6b]/50 py-1 rounded-r-lg bg-[#f8f6f0]/50"
+                              className="mt-4 pl-4 border-l-2 border-[#8b9a6b]/50 py-2 rounded-r-lg bg-[#f8f6f0]/50 space-y-3"
                             >
                               <p className="text-[#3d4a2d]/95 italic text-sm font-display">
-                                &ldquo;{config.verses.second.text}&rdquo;
+                                &ldquo;{config.verses.second.verse}&rdquo;
                               </p>
-                              <cite className="text-[#6b8e23]/90 text-xs mt-2 block not-italic">
+                              {config.verses.second.closing && (
+                                <p className="text-[#3d4a2d]/95 text-sm font-display leading-relaxed">
+                                  {config.verses.second.closing}
+                                </p>
+                              )}
+                              <cite className="text-[#6b8e23]/90 text-xs block not-italic">
                                 — {config.verses.second.reference}
                               </cite>
-                            </motion.blockquote>
+                            </motion.div>
                           )}
                         </AnimatePresence>
                       </motion.div>
